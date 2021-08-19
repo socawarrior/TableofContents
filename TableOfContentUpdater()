@@ -1,0 +1,11 @@
+Sub TableOfContentUpdater()
+    Dim pTableOfContent As Slide
+    Set pTableOfContent = ActivePresentation.Slides(2)
+    
+    For Each pHyperLink In pTableOfContent.Hyperlinks
+        Dim pLinkNumber As String
+        Dim pLinkedSlide As Slide
+        pLinkNumber = Left(pHyperLink.SubAddress, InStr(pHyperLink.SubAddress, ",") - 1)
+        pHyperLink.TextToDisplay = ActivePresentation.Slides.FindBySlideID(CLng(pLinkNumber)).SlideIndex
+    Next pHyperLink
+End Sub
